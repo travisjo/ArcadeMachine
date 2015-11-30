@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'arcademachine',
         'USER': 'arcademachine',
-        'PASSWORD': 'arcademachine',
+        'PASSWORD': 'HAeKd2fMXxrET6',
         'HOST': 'localhost',
         'PORT': 3306,
     },
