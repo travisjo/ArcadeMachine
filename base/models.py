@@ -18,4 +18,5 @@ class HighScore(models.Model):
     user = models.ForeignKey(User)
     game = models.ForeignKey(Game)
     score = models.CharField(max_length=200)
+    photo = models.ImageField()
     date_created = models.DateTimeField('Date created', auto_now_add=True)
