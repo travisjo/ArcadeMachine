@@ -1,4 +1,11 @@
+import base64
+
+from django.http import JsonResponse
 from django.db.models import Q
+from django.views.generic import View
+from django.views.decorators.csrf import csrf_exempt
+
+from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.views import APIView
 
@@ -44,3 +51,12 @@ class TaggedGames(APIView):
         """
         games = Game.objects.exclude(Q(latitude__isnull=True) | Q(longitude__isnull=True))
         return Response(games)
+
+
+class Tag(View):
+    @csrf_exempt
+    def post(self, request):
+        print request
+        print request.POST
+        print request.FILES
+        return JsonResponse({'success': 1}, status=200)
