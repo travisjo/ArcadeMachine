@@ -10,5 +10,6 @@ router.register(r'tagged', views.TaggedGameViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^tag$', views.Tag.as_view()),
     # url(r'^/games/tagged/', views.TaggedGames.as_view()),
 ]
