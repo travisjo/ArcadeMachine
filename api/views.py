@@ -1,6 +1,5 @@
-import base64
-
 from django.http import JsonResponse
+from django.contrib.auth import User
 from django.db.models import Q
 from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
@@ -59,4 +58,8 @@ class Tag(View):
         print request
         print request.POST
         print request.FILES
+        user = User.objects.get(pk=1)
+        game = Game.objects.get(pk=2)
+        instance = HighScore(user=user, game=game, score="12345", photo=request.FILES['picture'])
+        instance.save()
         return JsonResponse({'success': 1}, status=200)
