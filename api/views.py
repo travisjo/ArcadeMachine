@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.contrib.auth import User
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
