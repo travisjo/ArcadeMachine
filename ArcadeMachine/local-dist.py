@@ -1,4 +1,4 @@
-# Debug = True
+# DEBUG = True
 
 ALLOWED_HOSTS = []
 
