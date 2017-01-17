@@ -22,11 +22,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '_3p8p5v86ek!_p%=(+=0u93u_h$e*po)$9mvz#39e1phv5dvp#'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -74,18 +69,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ArcadeMachine.wsgi.application'
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'arcademachine',
-        'USER': 'arcademachine',
-        'PASSWORD': 'HAeKd2fMXxrET6',
-        'HOST': 'localhost',
-        'PORT': 3306,
-    },
-}
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -116,3 +99,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     )
 }
+
+try:
+    from local import *
+except ImportError as e:
+    pass
