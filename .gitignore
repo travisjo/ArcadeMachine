@@ -1,2 +1,4 @@
 *.pyc
 ArcadeMachine/local.py
+env
+logs
