@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.views import APIView
+from rest_framework import permissions
 
 from base.models import HighScore, Game
 
@@ -17,22 +18,33 @@ class HighScoreViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows high scores to be viewed or edited.
     """
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = HighScore.objects.all().order_by('-date_created')
     serializer_class = HighScoreSerializer
+
+    def create(self, request):
+        data = request.data.copy()
+        data['user'] = request.user.id
+        serializer = HighScoreSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+        return JsonResponse({'success': 1}, status=200)
 
 
 class GameViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows high scores to be viewed or edited.
+    API endpoint that lists games
     """
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Game.objects.all().order_by('-date_created')
     serializer_class = GameSerializer
 
 
 class TaggedGameViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows high scores to be viewed or edited.
+    API endpoint that shows tagged games
     """
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Game.objects.exclude(Q(latitude__isnull=True) | Q(longitude__isnull=True)).order_by('-date_created')
     serializer_class = GameSerializer
 

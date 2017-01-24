@@ -10,9 +10,7 @@ class GameSerializer(serializers.ModelSerializer):
 
 
 class HighScoreSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField()
-    game = serializers.StringRelatedField()
-
+    
     class Meta:
         model = HighScore
-        fields = ('user', 'game', 'score', 'date_created')
+        fields = ('user', 'game', 'score', 'photo', 'date_created')
