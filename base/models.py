@@ -13,7 +13,7 @@ class Game(models.Model):
     date_modified = models.DateTimeField('Date modified', auto_now=True)
 
     def __str__(self):
-        return "{} - {}".format(self.name, self.year)
+        return "{}: {} - {}".format(self.id, self.name, self.release_date)
 
 
 class HighScore(models.Model):
