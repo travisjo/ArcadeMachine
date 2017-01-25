@@ -23,9 +23,12 @@ class HighScoreViewSet(viewsets.ModelViewSet):
     serializer_class = HighScoreSerializer
 
     def create(self, request):
-        data = request.data.copy()
-        data['user'] = request.user.id
-        serializer = HighScoreSerializer(data=data)
+        serializer = HighScoreSerializer(data={
+            'user': request.user.id,
+            'game': request.data['game'],
+            'score': request.data['score'],
+            'photo': request.data['photo'],
+        })
         if serializer.is_valid(raise_exception=True):
             serializer.save()
         return JsonResponse({'success': 1}, status=200)
