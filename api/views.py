@@ -19,7 +19,7 @@ class HighScoreViewSet(viewsets.ModelViewSet):
     API endpoint that allows high scores to be viewed or edited.
     """
     permission_classes = (permissions.IsAuthenticated,)
-    queryset = HighScore.objects.all().order_by('-date_created')
+    queryset = HighScore.objects.all().order_by('date_created')
     serializer_class = HighScoreSerializer
 
     def create(self, request):
