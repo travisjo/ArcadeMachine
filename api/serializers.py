@@ -10,10 +10,12 @@ class GameSerializer(serializers.ModelSerializer):
 
 
 class HighScoreSerializer(serializers.ModelSerializer):
+    game_name = serializers.SerializerMethodField()
+    username = serializers.SerializerMethodField()
 
     class Meta:
         model = HighScore
-        fields = ('user', 'game', 'score', 'photo', 'date_created')
+        fields = ('username', 'user', 'game_name', 'game', 'score', 'photo', 'date_created')
 
     def create(self, validated_data):
         score = HighScore(
@@ -24,3 +26,9 @@ class HighScoreSerializer(serializers.ModelSerializer):
         )
         score.save()
         return score
+
+    def get_game_name(self, obj):
+        return obj.game.name
+
+    def get_username(self, obj):
+        return obj.user.username
