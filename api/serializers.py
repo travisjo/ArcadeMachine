@@ -10,7 +10,7 @@ class GameSerializer(serializers.ModelSerializer):
 
 
 class HighScoreSerializer(serializers.ModelSerializer):
-    
+
     class Meta:
         model = HighScore
         fields = ('user', 'game', 'score', 'photo', 'date_created')
