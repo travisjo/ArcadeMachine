@@ -15,7 +15,7 @@ class HighScoreSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HighScore
-        fields = ('username', 'user', 'game_name', 'game', 'score', 'photo', 'date_created')
+        fields = ('id', 'username', 'user', 'game_name', 'game', 'score', 'photo', 'date_created')
 
     def create(self, validated_data):
         score = HighScore(
