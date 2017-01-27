@@ -8,10 +8,15 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework import permissions
+from rest_framework.pagination import PageNumberPagination
 
 from base.models import HighScore, Game
 
-from .serializers import HighScoreSerializer, GameSerializer
+from .serializers import HighScoreSerializer, HighScoreUploadedSerializer, GameSerializer
+
+
+class LargeResultsSetPagination(PageNumberPagination):
+    page_size = 1000
 
 
 class HighScoreViewSet(viewsets.ModelViewSet):
@@ -21,6 +26,7 @@ class HighScoreViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = HighScore.objects.all().order_by('date_created')
     serializer_class = HighScoreSerializer
+    pagination_class = LargeResultsSetPagination
 
     def create(self, request):
         serializer = HighScoreSerializer(data={
@@ -31,7 +37,8 @@ class HighScoreViewSet(viewsets.ModelViewSet):
         })
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-        return JsonResponse({'success': 1}, status=200)
+            return JsonResponse(HighScoreUploadedSerializer(serializer.instance).data, status=200)
+        return JsonResponse({}, status=400)
 
 
 class GameViewSet(viewsets.ModelViewSet):
