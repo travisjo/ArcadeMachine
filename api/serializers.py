@@ -32,3 +32,18 @@ class HighScoreSerializer(serializers.ModelSerializer):
 
     def get_username(self, obj):
         return obj.user.username
+
+
+class HighScoreUploadedSerializer(serializers.ModelSerializer):
+    game_name = serializers.SerializerMethodField()
+    username = serializers.SerializerMethodField()
+
+    class Meta:
+        model = HighScore
+        fields = ('id', 'username', 'user', 'game_name', 'game', 'score', 'date_created')
+
+    def get_game_name(self, obj):
+        return obj.game.name
+
+    def get_username(self, obj):
+        return obj.user.username
