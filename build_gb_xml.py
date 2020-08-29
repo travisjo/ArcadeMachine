@@ -8,7 +8,7 @@ def pull_page(page_number, page_size):
     platforms = 84
     field_list = 'id,name,aliases,original_release_date'
     offset = page_number * page_size
-    print "Pulling games from {} to {}".format(offset, offset + page_size)
+    print("Pulling games from {} to {}".format(offset, offset + page_size))
     url = 'http://www.giantbomb.com/api/games/?format=json&limit={}&offset={}&field_list={}&platforms={}&api_key={}'.format(page_size, offset, field_list, platforms, api_key)
     # print url
     response = requests.get(url)
@@ -27,7 +27,7 @@ games = []
 for page in range(0, pages):
     games += pull_page(page, page_size)
 
-print 'Found {} games.'.format(len(games))
+print('Found {} games.'.format(len(games)))
 # import ipdb; ipdb.set_trace()
 
 # game = {'original_release_date': '1999-03-18 00:00:00', 'id': 18, 'name': 'Metal Slug X: Super Vehicle - 001', 'aliases': None}
