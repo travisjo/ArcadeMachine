@@ -103,6 +103,6 @@ REST_FRAMEWORK = {
 }
 
 try:
-    from local import *
+    from .local import *
 except ImportError as e:
     pass

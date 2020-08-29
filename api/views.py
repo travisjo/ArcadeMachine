@@ -77,9 +77,9 @@ class TaggedGames(APIView):
 class Tag(View):
     @csrf_exempt
     def post(self, request):
-        print request
-        print request.POST
-        print request.FILES
+        print(request)
+        print(request.POST)
+        print(request.FILES)
         user = User.objects.get(pk=1)
         game = Game.objects.get(pk=2)
         instance = HighScore(user=user, game=game, score="12345", photo=request.FILES['picture'])
