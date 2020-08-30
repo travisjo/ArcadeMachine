@@ -6,7 +6,7 @@ from base.models import HighScore, Game
 class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
-        fields = ('name', 'year', 'latitude', 'longitude', 'date_created', 'date_created', 'date_modified')
+        fields = ('name', 'release_date', 'created', 'modified')
 
 
 class HighScoreSerializer(serializers.ModelSerializer):
@@ -15,7 +15,8 @@ class HighScoreSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HighScore
-        fields = ('id', 'username', 'user', 'game_name', 'game', 'score', 'photo', 'date_created')
+        fields = ('id', 'username', 'user', 'game_name', 'machine', 'score', 'photo',
+                  'created')
 
     def create(self, validated_data):
         score = HighScore(
@@ -28,7 +29,7 @@ class HighScoreSerializer(serializers.ModelSerializer):
         return score
 
     def get_game_name(self, obj):
-        return obj.game.name
+        return obj.machine.game.name
 
     def get_username(self, obj):
         return obj.user.username
@@ -40,10 +41,10 @@ class HighScoreUploadedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HighScore
-        fields = ('id', 'username', 'user', 'game_name', 'game', 'score', 'date_created')
+        fields = ('id', 'username', 'user', 'game_name', 'machine', 'score', 'created')
 
     def get_game_name(self, obj):
-        return obj.game.name
+        return obj.machine.game.name
 
     def get_username(self, obj):
         return obj.user.username

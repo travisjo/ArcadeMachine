@@ -7,7 +7,7 @@ from api import views
 router = routers.DefaultRouter()
 router.register(r'scores', views.HighScoreViewSet)
 router.register(r'games', views.GameViewSet)
-router.register(r'tagged', views.TaggedGameViewSet)
+router.register(r'tagged', views.TaggedMachineViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

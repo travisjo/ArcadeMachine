@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework.pagination import PageNumberPagination
 
-from base.models import HighScore, Game
+from base.models import HighScore, Game, Machine
 
 from .serializers import HighScoreSerializer, HighScoreUploadedSerializer, GameSerializer
 
@@ -24,7 +24,7 @@ class HighScoreViewSet(viewsets.ModelViewSet):
     API endpoint that allows high scores to be viewed or edited.
     """
     permission_classes = (permissions.IsAuthenticated,)
-    queryset = HighScore.objects.all().order_by('date_created')
+    queryset = HighScore.objects.all().order_by('created')
     serializer_class = HighScoreSerializer
     pagination_class = LargeResultsSetPagination
 
@@ -46,31 +46,32 @@ class GameViewSet(viewsets.ModelViewSet):
     API endpoint that lists games
     """
     permission_classes = (permissions.IsAuthenticated,)
-    queryset = Game.objects.all().order_by('-date_created')
+    queryset = Game.objects.all().order_by('-created')
     serializer_class = GameSerializer
 
 
-class TaggedGameViewSet(viewsets.ModelViewSet):
+class TaggedMachineViewSet(viewsets.ModelViewSet):
     """
     API endpoint that shows tagged games
     """
     permission_classes = (permissions.IsAuthenticated,)
-    queryset = Game.objects.exclude(Q(latitude__isnull=True) | Q(longitude__isnull=True)).order_by('-date_created')
+    queryset = Machine.objects.exclude(Q(latitude__isnull=True) | Q(longitude__isnull=True)).order_by('-created')
     serializer_class = GameSerializer
 
 
-class TaggedGames(APIView):
+class TaggedMachines(APIView):
     """
     View to list all users in the system.
 
     * Requires token authentication.
     * Only admin users are able to access this view.
     """
+
     def get(self, request, format=None):
         """
         Return a list of all users.
         """
-        games = Game.objects.exclude(Q(latitude__isnull=True) | Q(longitude__isnull=True))
+        games = Machine.objects.exclude(Q(latitude__isnull=True) | Q(longitude__isnull=True))
         return Response(games)
 
 
