@@ -7,3 +7,4 @@ requests
 django-extensions
 django_storages
 boto3
+pyyaml

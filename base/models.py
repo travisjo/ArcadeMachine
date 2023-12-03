@@ -5,6 +5,7 @@ from django_extensions.db.models import TimeStampedModel
 
 class Game(TimeStampedModel):
     giantbomb_id = models.IntegerField(null=True)
+    giantbomb_guid = models.CharField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=200)
     aliases = models.TextField(blank=True, null=True)
     release_date = models.DateField('Year released', null=True)

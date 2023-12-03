@@ -1,22 +1,31 @@
 from rest_framework import serializers
 
-from base.models import HighScore, Game
+from base.models import HighScore, Game, Machine
 
 
 class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
-        fields = ('name', 'release_date', 'created', 'modified')
+        fields = ('id', 'name', 'release_date',)
+
+
+class MachineSerializer(serializers.ModelSerializer):
+    game = GameSerializer()
+
+    class Meta:
+        model = Machine
+        fields = ('id', 'game', 'latitude', 'longitude')
 
 
 class HighScoreSerializer(serializers.ModelSerializer):
     game_name = serializers.SerializerMethodField()
     username = serializers.SerializerMethodField()
+    machine = MachineSerializer()
 
     class Meta:
         model = HighScore
         fields = ('id', 'username', 'user', 'game_name', 'machine', 'score', 'photo',
-                  'created')
+                  'modified')
 
     def create(self, validated_data):
         score = HighScore(
@@ -41,7 +50,7 @@ class HighScoreUploadedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HighScore
-        fields = ('id', 'username', 'user', 'game_name', 'machine', 'score', 'created')
+        fields = ('id', 'username', 'user', 'game_name', 'machine', 'score', 'modified')
 
     def get_game_name(self, obj):
         return obj.machine.game.name
