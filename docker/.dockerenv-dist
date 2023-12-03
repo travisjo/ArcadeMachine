@@ -1,0 +1,9 @@
+# If you run docker-compose manually make sure you use the --env-file .dockerenv argument or these won't be picked up!
+
+# Don't change these unless you know what you're doing
+COMPOSE_PROJECT_NAME=arcademachine
+
+# You can uncomment and override these values with whatever works for your local dev environment
+# DJANGO_PORT=8000
+# POSTGRES_PORT=5432
+# REDIS_PORT=6379

@@ -1,0 +1,3 @@
+# These will be injected into the env inside the container
+DJANGO_SETTINGS_MODULE=ArcadeMachine.settings
+#NODE_ENV=production

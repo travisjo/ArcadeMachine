@@ -2,3 +2,5 @@
 ArcadeMachine/local.py
 env
 logs
+docker/.dockerenv
+docker/.docker-localenv
