@@ -1,3 +1,16 @@
 # These will be injected into the env inside the container
 DJANGO_SETTINGS_MODULE=ArcadeMachine.settings
 #NODE_ENV=production
+
+DEBUG=True
+SECRET_KEY=""
+
+DATABASE_NAME=arcademachine
+DATABASE_USER=arcademachine
+DATABASE_PASSWORD=
+DATABASE_HOST=arcademachine-db
+
+AWS_ACCESS_KEY_ID=''
+AWS_SECRET_ACCESS_KEY=''
+
+GIANTBOMB_API_KEY=''
